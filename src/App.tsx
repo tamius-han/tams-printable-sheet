@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Charsheet from './components/Charsheet';
-import actors from './testing-data/actors';
+import actors from 'foundry-testing-data/actors';
 
 function App() {
   const character = actors.find(x => x.name === 'Drake Croft (oddih edition)');
