@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Josefin+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&family=Source+Sans+Pro:wght@300;400;600;700&family=Tillana:wght@400;700&display=swap');
+
+
+/*
+  base rem units off viewport height.
+  with charsheet having aspect ratio of A4 portrait, this guarantees that
+  what we see on the monitor is what we'll get from the printer, while
+  also allowing desktop view to be a bit bigger than the size of the
+  postage stamp.
+*/
+html, body {
+  @apply text-[1.2vh];
+}
+
+.App {
+  height: 100dvh;
+  width: 100dvw;
+
+  display: flex;
+  flex-direction: column;
+}
+/*  */
+.main-content {
+  /* @apply text-[0.02dvh]; */
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow-y: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diamond-box {
+  @apply flex justify-center items-center;
+  position: relative;
+}
+.diamond-box:before {
+
+  border: 1px solid black;
+
+  content: ' ';
+
+  position: absolute;
+  left: 50%;
+  top: 0;
+
+  z-index: -1;
+
+  height: 100%;
+  aspect-ratio: 1;
+
+  /* scale — ensures that square diagonal is equal to the height of the diamond in order to avoid overflows! */
+  transform: translate(-50%) rotate(45deg) scale(0.715);
+}
+
+.diamond-bottom-label {
+  @apply bg-black text-white pt-[0.125rem] -mt-[1.25em] w-full text-center;
+  position: relative;
+}
+.diamond-bottom-label:before, .diamond-bottom-label:after {
+  @apply bg-black;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  content: '';
+  height: 100%;
+  aspect-ratio: 1;
+}
+.diamond-bottom-label:before {
+  transform: translate(-50%) rotate(45deg);
+}
+.diamond-bottom-label:after {
+  left: calc(100% + 1px);
+  transform: translate(-50%) rotate(45deg);
+}
+
+.comma-separated div:not(:last-child):after {
+  content: ' •'
+}
+
+@media screen {
+  .show-print {
+    display: none;
+  }
+}
+@media print {
+  .hide-print {
+    display: none;
+  }
+}
