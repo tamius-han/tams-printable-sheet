@@ -1,4 +1,4 @@
-import { Item } from './5etypes';
+import { Abilities, Attributes, Item } from './5etypes';
 
 /**
  * Gets ability modifier for a given character
@@ -6,9 +6,54 @@ import { Item } from './5etypes';
  * @param ability ability code (str, dex, con, int, wis, cha)
  * @returns
  */
-export function getMod(abilities: any, ability: string): number {
-  return +(Math.floor((+abilities[ability].value - 10) / 2) + (abilities[ability].bonuses.check ?? 0));
+export function getMod(abilities: Abilities, ability: string): number {
+  return +(Math.floor((+(abilities as any)[ability].value - 10) / 2) + ((abilities as any)[ability].bonuses.check ?? 0));
 };
+
+/**
+ * Gets ability modifier with proficincy
+ * @param abilities 
+ * @param ability 
+ * @param attributes 
+ * @returns 
+ */
+export function getProfMod(abilities: Abilities, ability: string, attributes: Attributes) {
+  return +getMod(abilities, ability) + attributes.prof;
+}
+
+/**
+ * Converts period code to period name
+ * @param x e.g. lr
+ * @returns e.g. 'long rest'
+ */
+export function getPeriod(x: string) {
+  if (x === 'sr') {
+    return 'short rest';
+  }
+  if (x === 'lr') {
+    return 'long rest';
+  }
+  return '?'
+}
+
+/**
+ * Returns x if x is a number, converts x into corresponding ability or attribute if x is not a number
+ * @param x number, @prof, etc.
+ * @param abilities 
+ * @param attributes 
+ * @returns 
+ */
+export function getValue(x: number | string, abilities: Abilities, attributes: Attributes) {
+  if (! isNaN(+x)) {
+    return x;
+  }
+  if (x === '@prof') {
+    return +attributes.prof;
+  }
+
+  alert('dnd::getValue() — no binding for value of ' + x);
+  return 0;
+}
 
 /**
  * Gets saving throw modifier for a given character. If character is proficient with saving throws,

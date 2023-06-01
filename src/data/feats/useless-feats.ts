@@ -5,6 +5,7 @@ const uselessFeats: {[characterClass: string]: string[]} = {
     'Draconic Resistance',
     'Languages',
     'Nimble Escape',    // build a 'bonus action' section instead
+    'Breath Weapon',    // appears under weapons
   ],
   'rogue': [
     'Cunning Action', // not useless, but we consolidate things that give bonus actions under a single banner

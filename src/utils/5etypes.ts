@@ -52,7 +52,7 @@ export type Ability = {
   }
 }
 
-export type ability = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
+export type ability = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha' | string;
 export type Abilities = {
   str: Ability,
   dex: Ability,

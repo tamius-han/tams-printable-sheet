@@ -1,6 +1,7 @@
 import React from 'react';
-import { getMod, getSigned } from '../utils/dnd';
+import { getMod, getSigned, getProfMod, getValue } from '../utils/dnd';
 import { Abilities, Attributes, Item } from '../utils/5etypes';
+import { classNames } from '../utils/helpers';
 
 
 
@@ -133,9 +134,18 @@ export default function Weapons({items, abilities, attributes}: Props) {
 
   const weaponsAvailable = items.filter((x: any) => x.type === 'weapon');
 
+  const racialWeapons = items.filter((x: Item) => {
+    if (x.type === 'feat') {
+      // add things that show up under racial weapons here
+      return ['Breath Weapon'].includes(x.name);
+    }
+    return false;
+  })
+
 
   return <>
 
+    {/* Normal attacks (weapons) */}
     <div className="mt-8 mb-4 font-serif font-bold text-primary uppercase text-center">
       Attacks
     </div>
@@ -181,5 +191,40 @@ export default function Weapons({items, abilities, attributes}: Props) {
       </tbody>
     </table>
 
+    {/* Racial */}
+    {
+      racialWeapons.map((x: Item) => <>
+        {
+          x.name !== 'Breath Weapon' ? '' : <>
+            {/* Container */}
+            <div className="w-full">
+
+              {/* Main content */}
+              <div className="flex flex-row w-full mx-4 gap-8">
+                <div className={classNames([
+                  'flex-col flex-grow-1'
+                ])}>
+                  {x.name} - {x.system.damage.parts[0][1]}<br/>
+                  {x.system.target.value} {x.system.target.units} {x.system.target.type}
+                </div>
+                <div>
+                  💾 {x.system.save.ability} {8 + getProfMod(abilities, x.system.save.scaling, attributes)}
+                </div>
+                <div>
+                  {x.system.damage.parts[0][0]}
+                </div>
+                <div className="flex flex-row flex-grow-1 gap-2">
+                  <div className="">Uses:</div>
+                  <div className="w-[2rem] show-print"></div>
+                  <div className="hide-print" contentEditable>{x.system.uses.value}</div>
+                  <div>/ {getValue(x.system.uses.max, abilities, attributes)}</div>
+                </div>
+
+              </div>
+            </div>
+          </>
+        }
+      </>)
+    }
   </>
 }
