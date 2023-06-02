@@ -58,22 +58,64 @@ html, body {
   @apply bg-black text-white pt-[0.125rem] -mt-[1.25em] w-full text-center;
   position: relative;
 }
-.diamond-bottom-label:before, .diamond-bottom-label:after {
-  @apply bg-black;
+.row-decoration-diamond, .row-decoration-shard {
+  position: relative;
+}
+
+.diamond-bottom-label:before, .diamond-bottom-label:after,
+.row-decoration-diamond:not(.end, .mid):before, .row-decoration-diamond:not(.start, .mid):after,
+.row-decoration-shard:before, .row-decoration-shard:after,
+.row-decoration-diamond-transition-l:before, .row-decoration-diamond-transition-r:after {
+  box-sizing: border-box;
   position: absolute;
   z-index: -1;
-  left: 0;
   top: 0;
   content: '';
   height: 100%;
   aspect-ratio: 1;
 }
-.diamond-bottom-label:before {
+.diamond-bottom-label:before, .diamond-bottom-label:after {
+  @apply bg-black;
+}
+.row-decoration-diamond-transition-l {
+  margin-left: 0.25em;
+}
+
+.row-decoration-diamond.large:before,  .row-decoration-diamond.large:after {
+  height: 140%;
+}
+
+.row-decoration-diamond:before, .row-decoration-diamond:after,
+.row-decoration-shard:before, .row-decoration-shard:after {
+  background: inherit;
+  border: inherit;
+  border-right-width: 1px;
+  border-left-width: 1px;
+  color: inherit;
+}
+.row-decoration-diamond-transition-l:before, .row-decoration-diamond-transition-r:after {
+  z-index: 1;
+  @apply border-l-0 border-b-0;
+}
+
+.diamond-bottom-label:before, .row-decoration-diamond:before {
+  left: 0;
   transform: translate(-50%) rotate(45deg);
 }
-.diamond-bottom-label:after {
-  left: calc(100% + 1px);
+.diamond-bottom-label:after, .row-decoration-diamond:after {
+  left: calc(100%);
   transform: translate(-50%) rotate(45deg);
+}
+
+.row-decoration-shard:before,
+.row-decoration-diamond-transition-l:before {
+  left: 0;
+  transform: translate(-50%) rotate(45deg) scale(71%);
+}
+.row-decoration-shard:after,
+.row-decoration-diamond-transition-r:after {
+  left: calc(100%);
+  transform: translate(-50%) rotate(45deg) scale(71%);
 }
 
 .comma-separated div:not(:last-child):after {

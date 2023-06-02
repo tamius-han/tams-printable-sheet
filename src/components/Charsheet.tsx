@@ -29,7 +29,7 @@ export default function Charsheet({character} : Props) {
       </div>
 
       {/* Split the rest in a 1_2 fashion */}
-      <div className="flex flex-row">
+      <div className="flex flex-row w-full">
         <Abilities
           abilities={character.system.abilities}
           proficiency={character.system.attributes.prof}
@@ -40,7 +40,7 @@ export default function Charsheet({character} : Props) {
           proficiency={character.system.attributes.prof}
         />
 
-        <div className="flex flex-col">
+        <div className="grow flex flex-col">
           <HPACInit
             abilities={character.system.abilities}
             attributes={character.system.attributes}

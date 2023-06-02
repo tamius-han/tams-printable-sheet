@@ -61,6 +61,22 @@ function getWeaponDamage(item: Item) {
   return damages;
 }
 
+/**
+ * Whether weapon has range, reach, or any other special properties
+ * @param item
+ * @returns
+ */
+function hasRangeOrProperties(item: Item) {
+  if (item.system.range.value > 5) {
+    return true;
+  }
+  for (const key in item.system.properties) {
+    if ((item.system.properties as any)[key]) {
+      return true;
+    }
+  }
+  return false;
+}
 
 function getWeaponProperties(item: Item) {
   const properties = [];
@@ -115,10 +131,10 @@ function getRange(item: Item) {
   if (item.system.range.value > 5) {
     if (item.system.range.long) {
       return <div>
-        Range: <span className="text-grey">{item.system.range.value}</span><span className="text-grey-light"> / {item.system.range.long}</span> <span>{item.system.range.units}</span>
+        Range: <span className="text-black">{item.system.range.value}</span><span className="text-black/50"> / {item.system.range.long}</span> <span>{item.system.range.units}</span>
       </div>
     } else {
-      return <div>Reach: <span className="text-grey">{item.system.range.value}</span> {item.system.range.value}</div>
+      return <div>Reach: <span className="text-black">{item.system.range.value}</span> {item.system.range.value}</div>
     }
   }
   return <></>;
@@ -150,9 +166,9 @@ export default function Weapons({items, abilities, attributes}: Props) {
       Attacks
     </div>
 
-    <table className="mx-4">
+    <table border={0} cellPadding={0} cellSpacing={0}  className="mx-4 text-[0.85rem]">
       <thead>
-        <tr className="border-b border-b-grey-light mb-2">
+        <tr className="mb-[0.125em] uppercase text-[0.75em]">
           <th>Name</th>
           <th>+ATK</th>
           <th>+DMG</th>
@@ -160,35 +176,58 @@ export default function Weapons({items, abilities, attributes}: Props) {
 
         </tr>
       </thead>
-      <tbody>
       {
         weaponsAvailable.map( (x: Item) =>
           <>
             {/* main row */}
-            <tr className="text-center">
-              <td className="text-left pt-2">{x.name}</td>
-              <td className="pt-2">{getSigned(getWeaponAttackBonus(x, abilities, attributes))}</td>
-              <td className="pt-2">{getSigned(getWeaponDamageBonus(x, abilities, attributes))}</td>
-              <td rowSpan={2} className="flex flex-col pt-2">{
-                getWeaponDamage(x).map((x: any) => <>
-                  <div className="leading-none flex flex-row items-center">
-                    {x.d} <span className="ml-2 text-grey-light uppercase text-[0.6em]">{x.type}</span>
-                  </div>
-                </>)
-              }</td>
-            </tr>
-            <tr>
-              <td colSpan={3} className="text-[0.6rem] relative h-[0.6rem]">
-                <div className="absolute -top-[0.125rem] left-0 pl-[0.125rem] text-grey-light uppercase leading-none flex flex-row gap-1 italic comma-separated">
-                  <>{getRange(x)}</>
-                  <>{getWeaponProperties(x)}</>
+            <tr className="text-center tracking-none leading-none">
+              <td className="text-left">
+                <div className="pl-[0.5em] pt-[0.365em] pb-[0.125em] row-decoration-diamond start border border-x-0 border-black bg-primary-light row-decoration-diamond-transition-r">{x.name}</div>
+              </td>
+              <td className="">
+                <div className=" pt-[0.365em] pb-[0.125em] row-decoration-diamond mid border border-x-0 border-black row-decoration-diamond-transition-l">{getSigned(getWeaponAttackBonus(x, abilities, attributes))}</div>
+              </td>
+              <td className="">
+                <div className=" pt-[0.365em] pb-[0.125em] row-decoration-diamond mid border border-x-0 border-black bg-white">{getSigned(getWeaponDamageBonus(x, abilities, attributes))}</div>
+              </td>
+              <td rowSpan={2} className="relative">
+                <div className=" pt-[0.365em] pb-[0.125em] flex flex-col opacity-0">
+                  {
+                    getWeaponDamage(x).map((x: any) => <>
+                        <div className="leading-none flex flex-row items-center">
+                          {x.d} <span className="ml-2 text-grey-light uppercase text-[0.6em]">{x.type}</span>
+                        </div>
+                    </>)
+                  }
+                </div>
+                <div className="absolute top-0 left-0 w-full">
+                  <div className="pt-[0.365em] pb-[0.125em] relative row-decoration-diamond end border border-x-0 border-black bg-white">&nbsp;</div>
                 </div>
               </td>
             </tr>
+            <tr>
+              <td colSpan={3} className="text-[0.6rem] relative h-[0.6rem]">
+                <div className={classNames([
+                  "absolute -top-[0.25rem] left-0 pl-[0.125em]",
+                  hasRangeOrProperties(x) ? '' : 'opacity-0'
+                ])}>
+                  <div className="relative w-full z-10 px-4">
+                    <div className={classNames([
+                      'text-black/75 uppercase leading-none flex flex-row gap-1 italic comma-separated',
+                      'px-[0.5em] pt-[0.25em]',
+                      'row-decoration-shard border border-x-0 border-black bg-grey-faint'
+                    ])}>
+                      <>{getRange(x)}</>
+                      <>{getWeaponProperties(x)}</>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr><td><div className="h-[0.5em]"></div></td></tr>
           </>
         )
       }
-      </tbody>
     </table>
 
     {/* Racial */}
@@ -200,12 +239,22 @@ export default function Weapons({items, abilities, attributes}: Props) {
             <div className="w-full">
 
               {/* Main content */}
-              <div className="flex flex-row w-full mx-4 gap-8">
+              <div className={classNames([
+                "flex flex-row w-full mx-4 gap-8",
+                'row-decoration-diamond',
+                'bg-primary',
+                'border border-x-0 border-black'
+              ])}>
                 <div className={classNames([
-                  'flex-col flex-grow-1'
+                  'flex-col flex-grow-1',
+                  'relative'
                 ])}>
-                  {x.name} - {x.system.damage.parts[0][1]}<br/>
-                  {x.system.target.value} {x.system.target.units} {x.system.target.type}
+                  {x.name} - {x.system.damage.parts[0][1]}
+                  <div className={classNames([
+                    'absolute -bottom-[1rem] left-0'
+                  ])}>
+                    {x.system.target.value} {x.system.target.units} {x.system.target.type}
+                  </div>
                 </div>
                 <div>
                   💾 {x.system.save.ability} {8 + getProfMod(abilities, x.system.save.scaling, attributes)}
