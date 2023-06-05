@@ -12,10 +12,10 @@ export function getMod(abilities: Abilities, ability: string): number {
 
 /**
  * Gets ability modifier with proficincy
- * @param abilities 
- * @param ability 
- * @param attributes 
- * @returns 
+ * @param abilities
+ * @param ability
+ * @param attributes
+ * @returns
  */
 export function getProfMod(abilities: Abilities, ability: string, attributes: Attributes) {
   return +getMod(abilities, ability) + attributes.prof;
@@ -26,7 +26,7 @@ export function getProfMod(abilities: Abilities, ability: string, attributes: At
  * @param x e.g. lr
  * @returns e.g. 'long rest'
  */
-export function getPeriod(x: string) {
+export function getPeriodFromCode(x: string) {
   if (x === 'sr') {
     return 'short rest';
   }
@@ -35,13 +35,16 @@ export function getPeriod(x: string) {
   }
   return '?'
 }
+export function getPeriod(x: Item) {
+  return getPeriodFromCode(x.system.uses.per);
+}
 
 /**
  * Returns x if x is a number, converts x into corresponding ability or attribute if x is not a number
  * @param x number, @prof, etc.
- * @param abilities 
- * @param attributes 
- * @returns 
+ * @param abilities
+ * @param attributes
+ * @returns
  */
 export function getValue(x: number | string, abilities: Abilities, attributes: Attributes) {
   if (! isNaN(+x)) {
