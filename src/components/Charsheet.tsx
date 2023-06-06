@@ -21,6 +21,8 @@ export default function Charsheet({character} : Props) {
   const levels = classLevels.reduce((acc: number, x: any) => acc + x.levels, 0);
 
   return <>
+
+    {/* First page */}
     <div className="charsheet flex flex-col p-8 font-sans font-normal">
 
       {/* NAME AND SHIT — top of sheet, full width*/}
@@ -61,13 +63,26 @@ export default function Charsheet({character} : Props) {
       </div>
 
       {/* FEATS */}
-      <div>
+      <div className="h-[42rem]">
         <FeatList
           items={character.items}
           abilities={character.system.abilities}
           attributes={character.system.attributes}
         />
       </div>
+    </div>
+
+
+    {/* ALL the feats */}
+    <div className="charsheet2 flex flex-col p-8 font-sans font-normal h-full">
+      <h1 className="text-[3rem] text-center tracking-none">FULL LIST OF FEATS</h1>
+      <h1 className="text-[2rem] text-center">with unabridged descriptions</h1>
+      <FeatList
+        items={character.items}
+        abilities={character.system.abilities}
+        attributes={character.system.attributes}
+        showAllFeats={true}
+      />
     </div>
   </>;
 }

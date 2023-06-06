@@ -9,7 +9,7 @@ function App() {
   console.log('found character:', character);
 
   return (
-    <div className="App">
+    <div className="App flex flex-col">
       {/* <header className="App-header">
         Charsheet loader pls here
       </header> */}

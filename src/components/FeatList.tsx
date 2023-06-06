@@ -75,21 +75,22 @@ type Props = {
   items: Item[];
   abilities: Abilities;
   attributes: Attributes;
+  showAllFeats?: boolean;
 }
 
-export default function FeatList({items, abilities, attributes}: Props) {
+export default function FeatList({items, abilities, attributes, showAllFeats}: Props) {
 
 
-  const processedFeats = processFeats(items, abilities, attributes);
+  const processedFeats = processFeats(items, abilities, attributes, showAllFeats);
 
   return <>
     <div className="w-full text-center font-serif uppercase font-bold text-primary mb-[0.5em]">
       Feats
     </div>
-    <div className="feat-cols w-full h-[42rem] text-[0.9em]">
+    <div className="feat-cols w-full h-full text-[0.9em]">
       {
         processedFeats.map((item: Item) => <>
-          <div className="mb-[1em] inline-block feat">
+          <div className="mb-[1em] inline-block feat w-full">
             <div
               className={classNames([
                 "relative",
@@ -99,7 +100,7 @@ export default function FeatList({items, abilities, attributes}: Props) {
                 "bg-primary-light border border-primary-dark border-x-0"
               ])}
             >{item.name}</div>
-            <div className="text-black/75 text-[0.9em] pr-[0.5em] py-[0.5em] pl-[0.75em] bg-primary-light/25" dangerouslySetInnerHTML={{__html: item.tpsShort?.desc ?? item.system.description.value}}></div>
+            <div className="text-black/75 text-[0.9em] pr-[0.5em] py-[0.5em] pl-[0.75em] bg-primary-light/25 overflow-x-auto" dangerouslySetInnerHTML={{__html: item.tpsShort?.desc ?? item.system.description.value}}></div>
           </div>
         </>)
       }
