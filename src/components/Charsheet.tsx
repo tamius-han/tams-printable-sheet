@@ -13,7 +13,12 @@ type Props = {
 
 export default function Charsheet({character} : Props) {
 
-  const levels = (character.items.filter((x: any) => x.type === 'class')).reduce((acc: number, x: any) => acc + x.system.levels, 0);
+  const classLevels = character.items.filter((x: any) => x.type === 'class').map((x: any) => ({
+    name: x.name,
+    id: x.system.identifier,
+    levels: x.system.levels
+  }));
+  const levels = classLevels.reduce((acc: number, x: any) => acc + x.levels, 0);
 
   return <>
     <div className="charsheet flex flex-col p-8 font-sans font-normal">
@@ -50,6 +55,7 @@ export default function Charsheet({character} : Props) {
             abilities={character.system.abilities}
             attributes={character.system.attributes}
             items={character.items}
+            levels={classLevels}
           />
         </div>
       </div>

@@ -1,0 +1,52 @@
+.damage-item-diamond::before,
+.damage-item-diamond::after {
+  z-index: 5;
+  display: block;
+  content: ' ';
+  position: absolute;
+  left: 0;
+  top: 100%;
+
+  height: 225%;
+  aspect-ratio: 1;
+
+  transform: translate(-20%, -75%) rotate(45deg);
+}
+
+.damage-item-diamond::before {
+  background-color: white;
+  background: inherit;
+}
+
+.damage-item-diamond::after {
+  z-index: 6;
+  border: inherit !important;
+  border: 0.065em solid !important;
+  color: inherit;
+}
+
+.damage-item-type::before, .damage-item-type::after {
+  z-index: 1;
+
+  content: ' ';
+  position: absolute;
+
+  height: 100%;
+  aspect-ratio: 1;
+
+  background: inherit;
+  border: inherit;
+  color: inherit;
+
+  @apply border-l-0 border-t-[0.06em] border-r-[0.06em] border-b-0;
+}
+
+
+.damage-item-type::before {
+  left: 0;
+  transform: translate(-50%, -0.3em) rotate(-135deg) scale(71%);
+}
+.damage-item-type::after {
+  left: calc(100%);
+  transform: translate(-50%, -0.3em) rotate(45deg) scale(71%);
+}

@@ -2,10 +2,14 @@ import React from 'react';
 import { Abilities, Attributes, Item } from '../utils/5etypes';
 import uselessFeats from '../data/feats/useless-feats';
 import { getCharacterClasses } from '../utils/dnd';
-
+import { addShortFeats, getBonusActions } from '../data/feats/short-desc';
+import './FeatList.css';
+import { classNames } from '../utils/helpers';
 
 function processFeats(items: Item[], abilities: Abilities, attributes: Attributes, showAllFeats?: boolean) {
 
+
+  const bonusActionGrants = getBonusActions(items);
 
   const relevantItems = items.filter((x: Item) => {
     // hide non-feats
@@ -41,6 +45,26 @@ function processFeats(items: Item[], abilities: Abilities, attributes: Attribute
 
   // process features by type
 
+  // add data from shortFeats, unless showAllFeats is set in which case don't
+  if (!showAllFeats) {
+    addShortFeats(relevantItems);
+    console.log('added short feats to relevant items:;', relevantItems);
+  }
+
+  // insert bonus actions at the start of the list, if they exist:
+  if (bonusActionGrants.length) {
+    relevantItems.splice(
+      0,
+      0,
+      {
+        name: 'Bonus actions',
+        system: {} as any,
+        tpsShort: {
+          desc: bonusActionGrants.join(', ')
+        }
+      } as any
+    );
+  }
 
   return relevantItems;
 }
@@ -59,12 +83,23 @@ export default function FeatList({items, abilities, attributes}: Props) {
   const processedFeats = processFeats(items, abilities, attributes);
 
   return <>
-    <div className="flex flex-col flex-wrap w-full">
+    <div className="w-full text-center font-serif uppercase font-bold text-primary mb-[0.5em]">
+      Feats
+    </div>
+    <div className="feat-cols w-full h-[42rem] text-[0.9em]">
       {
         processedFeats.map((item: Item) => <>
-          <div className="w-[30%]">
-            <div className="text-primary">{item.name}</div>
-            <div dangerouslySetInnerHTML={{__html: item.system.description.value}}></div>
+          <div className="mb-[1em] inline-block feat">
+            <div
+              className={classNames([
+                "relative",
+                "text-black/75 feat-title",
+                "pr-[0.25em] pt-[0.25em] pl-[0.75em] ",
+                "text-bold font-serif uppercase font-bold leading-none",
+                "bg-primary-light border border-primary-dark border-x-0"
+              ])}
+            >{item.name}</div>
+            <div className="text-black/75 text-[0.9em] pr-[0.5em] py-[0.5em] pl-[0.75em] bg-primary-light/25" dangerouslySetInnerHTML={{__html: item.tpsShort?.desc ?? item.system.description.value}}></div>
           </div>
         </>)
       }

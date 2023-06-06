@@ -11,6 +11,8 @@ const uselessFeats: {[characterClass: string]: string[]} = {
   'rogue': [
     'Cunning Action', // not useless, but we consolidate things that give bonus actions under a single banner
     'Fast Hands',
+    'Expertise',      // reflected in 'skills' section — no need to waste space on feats list as well
+    'Sneak Attack',   // shows in 'attacks'
   ]
 }
 

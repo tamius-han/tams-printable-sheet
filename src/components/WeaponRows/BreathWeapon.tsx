@@ -21,7 +21,7 @@ export default function BreathWeaponRow({item, abilities, attributes}: WeaponPro
     </td>
 
     {/* save */}
-    <td className="uppercase">
+    <td className="uppercase pl-[0.125em]">
       <div className={
         classNames([
           "pt-[0.365em] pb-[0.125em] row-decoration-diamond mid border border-x-0 border-black row-decoration-diamond-transition-l",
@@ -78,11 +78,11 @@ export default function BreathWeaponRow({item, abilities, attributes}: WeaponPro
   {/* sub row */}
 
   <tr>
-    <td colSpan={4} className="text-[0.6rem] relative h-[0.6rem]">
+    <td colSpan={4} className="text-[0.8em] relative h-[0.8em]">
       <div className={classNames([
-        "absolute -top-[0.25rem] left-0 pl-[0.125em]"
+        "absolute -top-[0.3em] left-0 pl-[0.125em]"
       ])}>
-        <div className="relative w-full z-10 px-4">
+        <div className="relative w-full z-10 px-[1em]">
           <div className={classNames([
             'text-black/75 uppercase leading-none flex flex-row gap-1 italic comma-separated',
             'px-[0.5em] pt-[0.25em]',
@@ -94,11 +94,11 @@ export default function BreathWeaponRow({item, abilities, attributes}: WeaponPro
         </div>
       </div>
     </td>
-    <td className="relative text-[0.6rem] h-[0.6rem]">
+    <td className="relative text-[0.8em] h-[0.8em]">
       <div className={classNames([
-        "absolute -top-[0.25rem] right-0 pr-[0.125em]"
+        "absolute -top-[0.25em] right-0 pr-[0.125em]"
       ])}>
-        <div className="relative w-full z-10 px-4">
+        <div className="relative w-full z-10 px-[1em]">
           <div className={classNames([
             'text-black/75 uppercase leading-none flex flex-row gap-1 italic comma-separated',
             'px-[0.5em] pt-[0.25em]',

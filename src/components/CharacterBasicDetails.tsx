@@ -27,7 +27,7 @@ export default function CharacterBasicDetails({name, characterDetails, items, le
 
         {/* Name, class, race column */}
         <div className="flex-grow">
-          <div className="flex-grow text-[2.5rem] font-serif italic text-primary leading-none tracking-none">
+          <div className="flex-grow text-[2.5em] font-serif italic text-primary leading-none tracking-none">
             { name.split("(")[0] }
           </div>
 
@@ -41,7 +41,7 @@ export default function CharacterBasicDetails({name, characterDetails, items, le
 
         {/* XP BOX */}
         <div className="tracking-none leading-none flex flex-col items-end pt-[0.35rem]">
-          <div className="xp-box w-[5rem] py-1 flex flex-col items-end">
+          <div className="xp-box w-[5em] py-1 flex flex-col items-end">
             <div className="">
               { characterDetails.xp.value}
             </div>
@@ -51,10 +51,10 @@ export default function CharacterBasicDetails({name, characterDetails, items, le
 
         {/* LEVEL BOX */}
         <div className="w-[5rem] h-[5rem] text-center leading-none level-container ml-4">
-          <div className="level-box text-[3rem] font-light pt-1 -mb-1">
+          <div className="level-box text-[3em] font-light pt-1 -mb-1">
             { level }
           </div>
-          <div className="level-label font-serif uppercase font-bold text-white text-[0.75rem] pt-[0.30rem] pb-[0.125rem] tracking-none leading-none">
+          <div className="level-label font-serif uppercase font-bold text-white text-[0.75em] pt-[0.30em] pb-[0.125em] tracking-none leading-none">
             Level
           </div>
         </div>

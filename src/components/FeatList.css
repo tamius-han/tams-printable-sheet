@@ -1,0 +1,25 @@
+.feat-cols {
+  column-count: 3;
+  column-gap: 3em;
+  column-fill: auto;
+}
+
+.feat-title::before {
+  position: absolute;
+  content: ' ';
+  z-index: -1;
+
+  height: 2em;
+  aspect-ratio: 1;
+
+  top: 50%;
+  left: 0;
+
+  transform: translate(-50%, -50%) rotate(45deg);
+
+  background: inherit;
+  border: inherit;
+  color: inherit;
+
+  border: 1px solid !important;
+}
