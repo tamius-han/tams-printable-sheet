@@ -6,7 +6,19 @@
   width: 70.92dvh;
 
   aspect-ratio: 1/1.41;
-  border: 1px solid black;
+  overflow: hidden;
+}
+
+@media screen {
+  .charsheet, .charsheet2 {
+    border: 1px dotted #aaa;
+
+  }
+}
+@media print {
+  .charsheet, .charsheet2 {
+    overflow: hidden;
+  }
 }
 
 .charsheet2 {
@@ -17,5 +29,4 @@
   width: 70.92dvh;
 
   /* aspect-ratio: 1/1.41; */
-  border: 1px solid black;
 }

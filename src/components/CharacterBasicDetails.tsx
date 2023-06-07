@@ -1,14 +1,18 @@
 import React from 'react';
 import './CharacterBasicDetails.css';
+import { Abilities, Attributes } from '../utils/5etypes';
+import HPACInit from './HPACInit';
 
 type Props = {
   name: string,
   characterDetails: any,
+  abilities: Abilities,
+  attributes: Attributes,
   items: any,
   level: number
 }
 
-export default function CharacterBasicDetails({name, characterDetails, items, level}: Props) {
+export default function CharacterBasicDetails({name, characterDetails, items, level, abilities, attributes}: Props) {
 
   // get classes
   const characterClasses = items.filter((x: any) => x.type === 'class');
@@ -39,15 +43,21 @@ export default function CharacterBasicDetails({name, characterDetails, items, le
           </div>
         </div>
 
+        <HPACInit
+            abilities={abilities}
+            attributes={attributes}
+            items={items}
+        />
+
         {/* XP BOX */}
-        <div className="tracking-none leading-none flex flex-col items-end pt-[0.35rem]">
+        {/* <div className="tracking-none leading-none flex flex-col items-end pt-[0.35rem]">
           <div className="xp-box w-[5em] py-1 flex flex-col items-end">
             <div className="">
               { characterDetails.xp.value}
             </div>
             <div className="text-[0.75rem] text-grey-light font-serif uppercase font-bold">XP</div>
           </div>
-        </div>
+        </div> */}
 
         {/* LEVEL BOX */}
         <div className="w-[5rem] h-[5rem] text-center leading-none level-container ml-4">

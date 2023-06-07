@@ -31,6 +31,10 @@ html, body {
   align-items: center;
 }
 
+@media print {
+  html, .main-content, .App { overflow: hidden; }
+}
+
 .diamond-box {
   @apply flex justify-center items-center;
   position: relative;
@@ -162,4 +166,15 @@ html, body {
   .hide-print {
     display: none;
   }
+}
+
+table .alternate-primary:nth-child(odd) {
+  @apply bg-primary-light/75;
+}
+table .alternate-primary:nth-child(even) {
+  @apply bg-primary-light/50;
+}
+
+.small-caps {
+  font-variant: small-caps;
 }

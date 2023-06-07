@@ -25,6 +25,11 @@ module.exports = {
           acid: '#10080',
           poison: '#11ff55'
         }
+      },
+      coin: {
+        gp: '#b59902',
+        sp: '#b2b0b9',
+        cp: '#a26832'
       }
     },
     fontFamily: {

@@ -95,3 +95,77 @@ export function getSigned(input: any) {
 export function getCharacterClasses(items: Item[]): {classId: string, levels: number}[] {
   return items.filter((x: any) => x.type === 'class').map((x: any) => ({classId: x.system.identifier, levels: x.system.levels}));
 }
+
+export function getCarry(abilities: Abilities) {
+  return abilities.str.value * 15;
+}
+
+export function mapLanguages(languages: string[]) {
+  return languages.map((language: string) => {
+    switch (language) {
+      case 'cant':
+        return 'thieves\' cant';
+      default:
+        return language;
+    }
+  });
+}
+
+/**
+ * Returns armor proficiencies. Not all strings have been mapped.
+ * @param proficiencies
+ * @returns
+ */
+export function mapArmorProficiencies(proficiencies: string[]) {
+  return proficiencies.map((prof: string) => {
+    switch (prof) {
+      case 'lgt':
+        return 'light';
+      case 'med':
+        return 'medium';
+      case 'shl':
+        return 'shield';
+      case 'hvy':
+        return 'heavy';
+      default:
+        return prof;
+    }
+  });
+}
+
+/**
+ * Returns weapon proficiencies. Not all strings have been mapped.
+ * @param proficiencies
+ * @returns
+ */
+export function mapWeaponProficiencies(proficiencies: string[]) {
+  return proficiencies.map((prof: string) => {
+    switch (prof) {
+      case 'sim':
+        return 'simple';
+      case 'mar':
+        return 'martial';
+      case 'handcrossbow':
+        return 'hand crossbow';
+      default:
+        return prof;
+    }
+  });
+}
+
+
+/**
+ * Returns tool proficiencies. Not all strings have been mapped.
+ * @param proficiencies
+ * @returns
+ */
+export function mapToolProficiencies(proficiencies: string[]) {
+  return proficiencies.map((prof: string) => {
+    switch (prof) {
+      case 'thief':
+        return 'thieves\' tools';
+      default:
+        return `${prof}'s tools`;
+    }
+  });
+}

@@ -1,0 +1,5 @@
+.item-cols {
+  column-count: 2;
+  column-gap: 3em;
+  column-fill: auto;
+}
