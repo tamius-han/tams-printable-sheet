@@ -220,7 +220,7 @@ export default function Charsheet({character} : Props) {
       {/* Appearance, traits, etc. */}
       <div className="flex flex-row gap-[2em] text-[0.9em] mt-[1em] w-full">
         <div className="w-1/3">
-          <div className="font-serif uppercase text-primary">Appearance</div>
+          <div className="font-serif uppercase text-primary">Details</div>
           <div className="text-black/75 text-[0.8em]">
             <div><b>Gender:</b> {character.system.details.gender}</div>
             <div><b>Age:</b> {character.system.details.age}</div>
@@ -229,7 +229,7 @@ export default function Charsheet({character} : Props) {
             <div><b>Skin:</b> {character.system.details.skin}</div>
             <div><b>Hair:</b> {character.system.details.skin}</div>
 
-            <div dangerouslySetInnerHTML={{__html: character.system.details.appearance}}></div>
+            {/* <div dangerouslySetInnerHTML={{__html: character.system.details.appearance}}></div> */}
           </div>
         </div>
 
@@ -250,12 +250,15 @@ export default function Charsheet({character} : Props) {
 
       <div className="flex flex-row gap-[2em] text-[0.9em] mt-[2em] w-full">
         <div className="w-1/2">
-          <div className="font-serif uppercase text-primary">Biography</div>
+          <div className="font-serif uppercase text-primary mb-4 font-bold text-center">Biography</div>
           <div className="text-black/75 text-[0.8em]" dangerouslySetInnerHTML={{__html: character.system.details.biography.value}}></div>
         </div>
         <div className="w-1/2">
-          <div className="font-serif uppercase text-primary">Image</div>
-          alan pls add image here
+          <div className="font-serif uppercase text-primary mb-4 font-bold text-center">Appearance</div>
+          <img src="/drake_croft_placeholder.jpg" alt="fuck off" />
+          <div className="mt-4">
+          <div className="text-black/75 text-[0.8em]" dangerouslySetInnerHTML={{__html: character.system.details.appearance}}></div>
+          </div>
         </div>
       </div>
     </div>
