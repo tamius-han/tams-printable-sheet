@@ -26,7 +26,7 @@ export default function HPACInit({attributes, abilities, items}: Props) {
   function getAc() {
     return items.reduce((acc: number, x: any) => {
       // every item with system.armor.value anything other than falsy will contribute to AC
-      if ( x.system.equipped && x.system.armor?.value) {
+      if ( x.system.equipped && x.system.armor?.value && x.type !== 'weapon') {
         acc += x.system.armor.value;
         if (x.system.armor.dex) {
           acc += Math.max(x.system.armor.dex, getMod(abilities, 'dex'))
