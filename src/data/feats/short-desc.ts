@@ -18,7 +18,7 @@ const ShortFeats: any = {
       uses: '1 / attack',
       d: 'd6',
       classIdentifier: 'rogue',
-      diceFormula: ((classLevels: number) => Math.floor(classLevels / 2))
+      diceFormula: ((classLevels: number) => Math.ceil(classLevels / 2))
     }
   },
   'Historical Knowledge': {
