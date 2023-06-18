@@ -1,21 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import Charsheet from './components/Charsheet';
-import actors from 'foundry-testing-data/actors';
 
 function App() {
-  const character = actors.find(x => x.name === 'Drake Croft (oddih edition)');
-  console.log('found character:', character);
+
+  const [character, setCharacter] = useState(undefined as any);
+
+  const loadCharacter = async (fileChangeEvent: any) => {
+    const file = fileChangeEvent.target.files[0];
+    console.log('loaded file!:', file);
+    console.log('?', file, fileChangeEvent)
+
+    const char = await new Promise((resolve: (x : any) => void, reject: (x?: any) => void) => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        resolve(JSON.parse(fileReader.result as string));
+      };
+      fileReader.readAsText(file);
+    });
+    console.log('read character data:', char)
+    setCharacter(char);
+  }
 
   return (
     <div className="App flex flex-col">
       {/* <header className="App-header">
         Charsheet loader pls here
       </header> */}
-      <div className="main-content">
-        <Charsheet character={character} />
-      </div>
+      { character && character.items ?
+        <div className="main-content">
+          <Charsheet character={character} />
+        </div> : <>
+          <div>Select charsheet</div>
+          <input type="file" onChange={loadCharacter}/>
+        </>
+      }
     </div>
   );
 }
