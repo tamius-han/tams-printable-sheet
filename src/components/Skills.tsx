@@ -68,6 +68,13 @@ export default function Skills({abilities, skills, proficiency}: Props) {
           <div className="">{skill.label} <span className="opacity-50 text-[0.8em] capitalize pl-1">({skills[skill.key].ability})</span></div>
         </div>
       </>)}
+
+      <div className="text-center text-primary font-bold font-serif font-bold uppercase mt-[1em] mb-[0.5em]">Passives</div>
+      <div className="uppercase text-[0.8em] text-grey flex flex-row flex-wrap gap-x-[0.5em] mx-[0.5em] justify-center items-center ">
+        <div>Perception: <b className="text-black/75">{10 + (getSkillModifier(abilities, skills, 'prc', proficiency) as number)}</b></div>
+        <div>Investigation: <b className="text-black/75">{10 + (getSkillModifier(abilities, skills, 'inv', proficiency) as number)}</b></div>
+        <div>Insight: <b className="text-black/75">{10 + (getSkillModifier(abilities, skills, 'ins', proficiency) as number)}</b></div>
+      </div>
     </div>
   </>
 }

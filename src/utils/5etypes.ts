@@ -11,6 +11,10 @@ export type Item5e = {
     parts: string[][],
     versatile?: string,
   },
+  description: {
+    value: string,
+    [x: string]: string
+  },
   range: {
     value: number,
     long?: number,

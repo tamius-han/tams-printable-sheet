@@ -29,6 +29,28 @@ export default function Charsheet({character} : Props) {
     items: character.items.find((x: Item) => x.name.startsWith("Goggles of Night")) ? 60 : 0,
   }
 
+  console.log('items?', character.items);
+
+  const resistances = [
+    ...character.items.reduce(
+      (acc: string[], x: Item) => {
+        if (x.name.toLowerCase() === 'draconic resistance') {
+          try {
+            const match = x.system.description.value.match(/\b([a-zA-Z]+) damage/);
+            if (match) {
+              acc.push(match[1]);
+            }
+          } catch (e) {
+            console.warn('Problem determining resistances. Regex didn\'t work, prolly.');
+          }
+        }
+
+        return acc;
+      },
+      [] as string[]
+    )
+  ] as string[];
+
   return <>
 
     {/* First page */}
@@ -171,6 +193,16 @@ export default function Charsheet({character} : Props) {
             </div>
           </div>
 
+          {/* Resistances n shit */}
+          { resistances && resistances.length ?
+            <div className="flex flex-row gap-[1em] mt-[0.25em]">
+              <div className="text-[0.8em] flex flex-row gap-[1em] items-baseline">
+                <div className="text-primary uppercase font-bold font-serif">Resistances</div>
+                <div className="text-black/75 leading-none capitalize text-[0.8em]">{ resistances.join(' · ') }</div>
+              </div>
+            </div> : <></>
+          }
+
           <Weapons
             abilities={character.system.abilities}
             attributes={character.system.attributes}
@@ -181,7 +213,7 @@ export default function Charsheet({character} : Props) {
       </div>
 
       {/* FEATS */}
-      <div className="h-[42rem]">
+      <div className="h-[40dvh] text-[0.8em]">
         <FeatList
           items={character.items}
           abilities={character.system.abilities}
@@ -255,7 +287,7 @@ export default function Charsheet({character} : Props) {
         </div>
         <div className="w-1/2">
           <div className="font-serif uppercase text-primary mb-4 font-bold text-center">Appearance</div>
-          <img src="/drake_croft_placeholder.jpg" alt="fuck off" />
+          <img src="/drake_croft_placeholder-transparent.png" alt="fuck off" />
           <div className="mt-4">
           <div className="text-black/75 text-[0.8em]" dangerouslySetInnerHTML={{__html: character.system.details.appearance}}></div>
           </div>
