@@ -77,11 +77,24 @@ export default function ItemList({items, currency, maxCarry}: Props) {
         case 'class':
         case 'subclass':
         case 'background':
+        case 'spell':
           return acc;
         default:
-          acc.price += (item.system.price * item.system.quantity);
-          acc.weight += Math.max((item.system.weight * item.system.quantity), 0);  // don't account for negative weighs
-          acc.carryCap += Math.max(-(item.system.weight * item.system.quantity), 0);  // increase carry cap for animals
+          if (!isNaN(item.system.quantity)) {
+            if (!isNaN(item.system.price)) {
+              acc.price += (item.system.price * item.system.quantity);
+            } else {
+              console.warn('item.system.quantity is nan:', item);
+            }
+            if (!isNaN(item.system.weight)) {
+              acc.weight += Math.max((item.system.weight * item.system.quantity), 0);  // don't account for negative weighs
+              acc.carryCap += Math.max(-(item.system.weight * item.system.quantity), 0);  // increase carry cap for animals
+            } else {
+              console.warn('item.system.weight is nan:', item);
+            }
+          } else {
+            console.warn('item.system.quantity is nan:', item);
+          }
           return acc;
       };
     },

@@ -91,9 +91,9 @@ export default function HPACInit({attributes, abilities, items}: Props) {
             <span className="show-print">{attributes.hp.max}</span>
             <span className="hide-print" contentEditable>{attributes.hp.value}</span>
           </div>
-          <div className="diamond-bottom-label font-serif font-bold text-[0.8rem] uppercase">
-            <span className=" text-white">
-            Max HP<span className="hide-print">: <span className="font-sans text-primary" contentEditable onInput={updateMaxHp} onKeyDown={exitOnEnter} onKeyUp={exitOnEnter}>{attributes.hp.max}</span></span>
+          <div className="diamond-bottom-label font-serif font-bold text-[0.8rem] uppercase text-nowrap">
+            <span className="text-white text-nowrap">
+              Max&nbsp;HP<span className="hide-print">:&nbsp;<span className="font-sans text-primary" contentEditable onInput={updateMaxHp} onKeyDown={exitOnEnter} onKeyUp={exitOnEnter}>{attributes.hp.max}</span></span>
             </span>
           </div>
         </div>
@@ -130,8 +130,8 @@ export default function HPACInit({attributes, abilities, items}: Props) {
             </>)}
           </div>
 
-          <div className="diamond-bottom-label font-serif font-bold text-[0.8rem] uppercase">
-            Hit dice
+          <div className="diamond-bottom-label font-serif font-bold text-[0.8rem] uppercase text-nowrap">
+            Hit&nbsp;dice
           </div>
         </div>
 

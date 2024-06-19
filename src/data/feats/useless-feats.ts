@@ -16,6 +16,7 @@ const uselessFeats: {[characterClass: string]: string[]} = {
     'Sneak Attack',   // shows in 'attacks'
   ],
   'ranger': [
+    'Spellcasting',
     'Spellcasting Focus',
     'Draconic Gift',
     'Deft Explorer'

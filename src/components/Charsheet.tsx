@@ -236,27 +236,41 @@ export default function Charsheet({character} : Props) {
     { character.system.spells.spell1.max !== 0 ? // TODO: NOTE: PROLLY DOESN'T WORK FOR WARLOCKS
       <>
         <div className="charsheet flex flex-col p-8 font-sans font-normal">
-          <div className="text-[2.5em] italic font-serif">{character.name}</div>
-          <div className="flex flex-row justify-between">
-            <div className="text-grey text-light font-light">Spellcasting</div>
-            <div>
-              Attack bonus:  {spellcastingData.attackBonus}
-            </div>
-            <div>
-              Spell save DC: {spellcastingData.spellSave}
+          <div className="text-[2.5em] italic font-serif text-primary">{character.name}</div>
+          <div className="flex flex-row justify-between -mt-2 mb-4">
+            <div className="text-grey text-light font-light text-[1.5em]">Spellcasting</div>
+            <div className="flex flex-col text-[#202848] text-light text-[0.8em]">
+              <div className="flex flex-row gap-4 justify-between">
+                <div className="opacity-75">Attack bonus:</div> <b>{spellcastingData.attackBonus}</b>
+              </div>
+              <div className="flex flex-row gap-4 justify-between">
+                <div className="opacity-75">Spell save DC:</div> <b>{spellcastingData.spellSave}</b>
+              </div>
             </div>
           </div>
 
+          {
+            character.items.find( (x: any) => x.type === 'spell' && x.system.level === 0 ) ? <>
+              <div className="text-[0.78em]">
+                <SpellList
+                    items={character.items}
+                    spellLevel={0}
+                    abilities={character.system.abilities}
+                    attributes={character.system.attributes}
+                ></SpellList>
+              </div>
+            </> : <></>
+          }
 
           { character.system.spells.spell1.max ?
-            <>
+            <div className="text-[0.78em]">
               <SpellList
                   items={character.items}
                   spellLevel={1}
                   abilities={character.system.abilities}
                   attributes={character.system.attributes}
               ></SpellList>
-            </> : <></>
+            </div> : <></>
           }
         </div>
       </> : <></>
@@ -327,7 +341,7 @@ export default function Charsheet({character} : Props) {
         </div>
         <div className="w-1/2">
           <div className="font-serif uppercase text-primary mb-4 font-bold text-center">Appearance</div>
-          <img src="/drake_croft_placeholder-transparent.png" alt="fuck off" />
+          <img src="/drake_croft_placeholder-transparent.png" alt="chatgpt doesnt do goblin drawings" />
           <div className="mt-4">
           <div className="text-black/75 text-[0.8em]" dangerouslySetInnerHTML={{__html: character.system.details.appearance}}></div>
           </div>
@@ -344,7 +358,7 @@ export default function Charsheet({character} : Props) {
     <div className="charsheet2 flex flex-col p-8 font-sans font-normal h-full">
       <h1 className="text-[3rem] text-center tracking-none">FULL LIST OF FEATS</h1>
       <h1 className="text-[2rem] text-center">with unabridged descriptions</h1>
-      <div className="grow shrink h-[90%] text-[0.8em]">
+      <div className="grow shrink text-[0.8em]">
         <FeatList
           items={character.items}
           abilities={character.system.abilities}
