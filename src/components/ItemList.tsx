@@ -31,6 +31,7 @@ export default function ItemList({items, currency, maxCarry}: Props) {
         case 'class':
         case 'subclass':
         case 'background':
+        case 'spell':
           break;
 
         // we add the other types of items
