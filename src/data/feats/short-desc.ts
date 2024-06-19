@@ -45,7 +45,38 @@ const ShortFeats: any = {
     tpsShort: {
       desc: 'Climbing doesn\'t cost extra movement.<br/>Running jump distance increases for +dex mod.'
     }
+  },
+  'Sharpshooter': {
+    tpsShort: {
+      desc: 'No disadvantage at long range. Ignore half-cover and 3/4-cover. Before making an attack, you can take -5 on attack for +10 on damage roll.'
+    }
+  },
+  'Favored Enemy': {
+    tpsShort: {
+      desc: 'You have advantage on Survival checks to track selected type of creature, as well as on Intelligence checks to recall information about them.<br/>________________________________'
+    }
+  },
+  'Favored Foe': {
+    tpsShort: {
+      desc: 'When you hit a creature, you can mark it favourite enemy for 1 minute (or until you lose concentration). Every hit (including first) deals extra damage.<br/>Uses: ___/___ (max: prof)<br/>Extra dmg: 1d4; 1d6 @lv6; 1d8 @lv14',
+    }
+  },
+  'Spellcasting': {
+    tpsShort: {
+      desc: '<small>(hardcoded for a certain ranger)</small><br/><b>Spell save DC: 12</b><br/><b>Spell attack: +4</b>'
+    }
+  },
+  'Drake Companion': {
+    tpsShort: {
+      desc: 'As an action, you can magically summon a drake. It takes its turn immediately after you. It can move and use reactions on its own. It can only take <i>Dodge</i> action, unless you take a bonus action to command it to do something else.<br/>If you\'re incapacitated, drake can take any action.<br/>Can be used 1/long rest for free; further summons cost 1 lv1 spell slot.'
+    }
+  },
+  'Primal Awareness': {
+    tpsShort: {
+      desc: 'Once per long rest, you can cast <i>Speak with Animals</i> for free.'
+    }
   }
+
 };
 
 const BonusActionGrants: any = {
