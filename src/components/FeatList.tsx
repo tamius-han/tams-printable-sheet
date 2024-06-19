@@ -35,6 +35,7 @@ function processFeats(items: Item[], abilities: Abilities, attributes: Attribute
     // check if feat is considered an useless feat on base of class
     const charClasses = getCharacterClasses(items);
     for (const c of charClasses) {
+      console.log('character class:', c);
       if (uselessFeats[c.classId].includes(x.name)) {
         return false;
       }
