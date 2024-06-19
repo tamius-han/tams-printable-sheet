@@ -7,8 +7,9 @@ import HPACInit from './HPACInit';
 import Weapons from './Weapons';
 import FeatList from './FeatList';
 import ItemList from './ItemList';
-import { getCarry, mapArmorProficiencies, mapLanguages, mapToolProficiencies, mapWeaponProficiencies } from '../utils/dnd';
+import { getCarry, getMod, getProfMod, mapArmorProficiencies, mapLanguages, mapToolProficiencies, mapWeaponProficiencies } from '../utils/dnd';
 import { Item } from '../utils/5etypes';
+import SpellList from './SpellList';
 
 type Props = {
   character: any
@@ -27,6 +28,15 @@ export default function Charsheet({character} : Props) {
     racial: character?.system?.attributes.senses.darkvision,
     class: character.items.find((x: Item) => /Devil's Sight/.test(x.name)) ? 60 : 0,
     items: character.items.find((x: Item) => x.name.startsWith("Goggles of Night")) ? 60 : 0,
+  }
+
+  const spellcastingData = {
+    attackBonus: character.system.attributes.spellcasting ?
+      ( getProfMod(character.system.abilities, character.system.attributes.spellcasting, character.system.attributes))
+      : undefined,
+    spellSave: character.system.attributes.spellcasting ?
+      ( getProfMod(character.system.abilities, character.system.attributes.spellcasting, character.system.attributes) + 8)
+      : undefined
   }
 
   console.log('items?', character.items);
@@ -222,6 +232,36 @@ export default function Charsheet({character} : Props) {
       </div>
     </div>
 
+    {/* First and a halfth-page - spells (if exist) */}
+    { character.system.spells.spell1.max !== 0 ? // TODO: NOTE: PROLLY DOESN'T WORK FOR WARLOCKS
+      <>
+        <div className="charsheet flex flex-col p-8 font-sans font-normal">
+          <div className="text-[2.5em] italic font-serif">{character.name}</div>
+          <div className="flex flex-row justify-between">
+            <div className="text-grey text-light font-light">Spellcasting</div>
+            <div>
+              Attack bonus:  {spellcastingData.attackBonus}
+            </div>
+            <div>
+              Spell save DC: {spellcastingData.spellSave}
+            </div>
+          </div>
+
+
+          { character.system.spells.spell1.max ?
+            <>
+              <SpellList
+                  items={character.items}
+                  spellLevel={1}
+                  abilities={character.system.abilities}
+                  attributes={character.system.attributes}
+              ></SpellList>
+            </> : <></>
+          }
+        </div>
+      </> : <></>
+    }
+
     {/* Second page - BIO */}
     <div className="charsheet flex flex-col p-8 font-sans font-normal">
       <div className="text-[3em] italic font-serif text-primary mb-[0.5em]">{character.name}</div>
@@ -304,7 +344,7 @@ export default function Charsheet({character} : Props) {
     <div className="charsheet2 flex flex-col p-8 font-sans font-normal h-full">
       <h1 className="text-[3rem] text-center tracking-none">FULL LIST OF FEATS</h1>
       <h1 className="text-[2rem] text-center">with unabridged descriptions</h1>
-      <div className="grow shrink h-[90%]">
+      <div className="grow shrink h-[90%] text-[0.8em]">
         <FeatList
           items={character.items}
           abilities={character.system.abilities}
