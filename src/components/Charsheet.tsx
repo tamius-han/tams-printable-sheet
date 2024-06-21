@@ -298,7 +298,7 @@ export default function Charsheet({character} : Props) {
 
         <div className="flex flex-row gap-[0.5em] items-baseline">
           <div className="font-serif uppercase text-primary">Background</div>
-          <div className="text-black/75 text-[0.8em]">{character.items.find((x: Item) => x.type === 'background')?.name}</div>
+          <div className="text-black/75 text-[0.8em]">{character.items.find((x: Item) => x.type === 'background')?.name ?? character.system.details.background}</div>
         </div>
 
         <div className="flex flex-row gap-[0.5em] items-baseline">
