@@ -24,6 +24,10 @@ export default function Charsheet({character} : Props) {
   }));
   const levels = classLevels.reduce((acc: number, x: any) => acc + x.levels, 0);
 
+  // correct proficiency bonus for multiclasss:
+  const realProficiency = 1 + Math.ceil(levels / 4);
+  character.system.attributes.prof = realProficiency;
+
   const darkvision = {
     racial: character?.system?.attributes.senses.darkvision,
     class: character.items.find((x: Item) => /Devil's Sight/.test(x.name)) ? 60 : 0,
