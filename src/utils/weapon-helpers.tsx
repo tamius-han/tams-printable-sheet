@@ -28,10 +28,10 @@ export function getWeaponDamageBonus(item: Item, abilities: Abilities, attribute
 
   if (item.system.attunement) {
     if (item.system.attuned) {
-      bonus += item.system.attackBonus;
+      bonus += +item.system.attackBonus;
     }
   } else {
-    bonus += item.system.attackBonus;
+    bonus += +item.system.attackBonus;
   }
 
   return bonus;
@@ -47,7 +47,7 @@ export function getWeaponAttackBonus(item: Item, abilities: Abilities, attribute
   let bonus = getWeaponDamageBonus(item, abilities, attributes)
 
   if (item.system.proficient) {
-    bonus += attributes.prof;
+    bonus += +attributes.prof;
   }
 
   return bonus;
